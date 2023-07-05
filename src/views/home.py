@@ -21,7 +21,8 @@ def index():
     if not helper.logged_in():
         return render_template("home/google_login.html",
                                URI=app.config["GOOGLE_URI"],
-                               ENV=app.config["ENV"])
+                               ENV=app.config["ENV"],
+                               CLIENT_ID=app.config["CLIENT_ID"])
 
     surveys = survey_service.get_all_surveys()
 

@@ -9,6 +9,8 @@ on:
     paths-ignore:
       - 'Documentation/**'
       - 'README.md'
+      
+  workflow_dispatch:
 
 permissions:
   contents: read

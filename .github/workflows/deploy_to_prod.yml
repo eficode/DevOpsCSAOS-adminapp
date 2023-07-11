@@ -9,7 +9,6 @@ on:
     paths-ignore:
       - 'Documentation/**'
       - 'README.md'
-
     
 permissions:
   contents: read

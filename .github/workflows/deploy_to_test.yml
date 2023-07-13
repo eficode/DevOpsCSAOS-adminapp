@@ -9,8 +9,6 @@ on:
     paths-ignore:
       - 'Documentation/**'
       - 'README.md'
-      
-  workflow_dispatch:
 
   workflow_dispatch:
 

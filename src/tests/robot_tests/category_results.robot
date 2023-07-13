@@ -32,6 +32,7 @@ A Category Result Having Cutoff 1.0 Has No Delete Button
     Go To Survey  2
     Click Link  Add category
     Create New Category
+    Wait Until Element Is Visible    id:categoryresults
     Click Element  categoryresults
     Expand Result Card  1
     Page Should Not Contain  Delete

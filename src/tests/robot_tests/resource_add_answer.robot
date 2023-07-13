@@ -18,6 +18,7 @@ Add New Answer
 
 Expand Answer Card
     [Arguments]  ${answer_index}
+    Wait Until Element Is Visible    id:expandable-answer-${answer_index}
     Click Element  id:expandable-answer-${answer_index}
 
 Edit Answer

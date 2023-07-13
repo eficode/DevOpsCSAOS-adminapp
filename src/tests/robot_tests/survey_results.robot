@@ -94,7 +94,7 @@ Survey Result Can Be Edited
     Page Should Contain  You hate elephants
     Edit Result  You love elephants  0.98  1
     Save Result
-    Page Should Contain  Result at cutoff point 0.98:
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Result at cutoff point 0.98:")]
     Expand Result Card  1
     Page Should Contain  You love elephants
 

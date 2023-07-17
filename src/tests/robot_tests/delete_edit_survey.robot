@@ -31,7 +31,7 @@ Try To Delete A Survey But Write Invalid Confirmation Text
     Open Delete Modal
     Write Confirmation Text To Modal  Masa Mainio
     Click Delete Modal Delete
-    Page Should Contain  Poistuisikohan
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Poistuisikohan")]
     Notification Is Displayed
     Page Should Contain  Confirmation did not match name of survey
 

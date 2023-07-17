@@ -13,6 +13,7 @@ Save Result
 
 Expand Result Card
     [Arguments]  ${result_index}
+    Wait Until Page Contains Element    id:expandable-result-${result_index}
     Click Element  id:expandable-result-${result_index}
 
 Edit Result

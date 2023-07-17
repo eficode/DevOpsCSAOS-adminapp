@@ -16,6 +16,7 @@ Logged In User Can Add a New Question
     Click Link  Add question
     Page Should Contain  Category weights
     Add New Question  kysymys1  1
+    Go To Survey    1
     Page Should Contain  kysymys1
 
 Back Button Opens Correct Survey Page
@@ -40,4 +41,4 @@ Empty Category Weights Are Interpreted As Zeros
     Click Element  id:survey-1
     Click Link  Add question
     Add Question With No Weights  kysymys3
-    Page Should Contain  kysymys3
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "kysymys3")]

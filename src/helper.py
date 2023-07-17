@@ -202,8 +202,8 @@ def plot_answer_distribution_for_questions(dataframe: df, q_names: list, q_ids: 
                                   y="count",
                                   autopct="%1.1f%%")
             plt.legend(title="Answer options",
-                       loc="upper left",
-                       bbox_to_anchor=(0.9, 0, 0, 1))
+                       loc="best",
+                       bbox_to_anchor=(1, 0.2, 0.5, 0.5))
 
             if user_group == "" and time_range is None:
                 plt.title("All users")
@@ -212,9 +212,9 @@ def plot_answer_distribution_for_questions(dataframe: df, q_names: list, q_ids: 
             plt.ylabel("")
 
             if user_group == "" and time_range is None:
-                plt.savefig(target_dir + f"{q_id}.png")
+                plt.savefig(target_dir + f"{q_id}.png", bbox_inches="tight")
             else:
-                plt.savefig(target_dir + f"{q_id}_{user_group}.png")
+                plt.savefig(target_dir + f"{q_id}_{user_group}.png", bbox_inches="tight")
             plt.close()
 
     except Exception:

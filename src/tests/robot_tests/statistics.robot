@@ -85,11 +85,11 @@ Entering Valid Range To Filter Dates Filters Users
     Press Keys  filter_start_date  2+TAB+2+TAB+2002+TAB+12+TAB+00
     Press Keys  filter_end_date  2+TAB+2+TAB+2002+TAB+12+TAB+01
     Click Button  Filter
-    Page Should Contain  Users with submissions (0 / 5)    
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Users with submissions (0 / 5)")]   
     
 Entering Invalid Date to User Filter Does Not Filter Anything
     Go To Statistics  8
-    Page Should Contain  Total submissions: 5
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Total submissions: 5")]   
 
 Filtering By Group Name Filters Users
     Go To Statistics  8
@@ -100,25 +100,25 @@ Filtering By Group Name Filters Users
 
 Statistics Page Displays Average Zero If There Is No Answers
     Go To Statistics  1
-    Page Should Contain  None
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "None")]   
 
 Statistics Page Displays Correct Average Values
     Go To Statistics  8
-    Page Should Contain  3.0
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "3.0")]   
     Page Should Contain  2.0
 
 Filtering By Email Filters Users
     Go To Statistics  8
     Input Text  filter_email  duser
     Click Button  Filter
-    Page Should Contain  Users with submissions (2 / 5)
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Users with submissions (2 / 5)")]   
 
 With Filtering Unfiltered Average Is Shown
     Go To Statistics  8
     # Choose user group B-ryhmä
     Select From List By Value  name:filter_group_id  bb2ce58d-f27b-4ade-9e31-e8aca8c7ca20
     Click Button  Filter
-    Page Should Contain  Average score
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Average score")]   
     Page Should Contain  5.0   
     Page Should Contain  Unfiltered average
     Page Should Contain  3.0
@@ -129,7 +129,8 @@ Filtering With Email And Group Shows Correct Averages
     Select From List By Value  name:filter_group_id  bb2ce58d-f27b-4ade-9e31-e8aca8c7ca20
     Input Text  filter_email  duser
     Click Button  Filter    
-    Page Should Contain  5.0
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "5.0")]   
+
 
 Without Filtering Unfiltered Average Is Not Shown
     Go To Statistics  8

@@ -50,7 +50,7 @@ Logged In User Can Add Answer While Editing Question
     Click Link  edit-question-1
     Add New Answer  Hammer  11
     Expand Answer Card  1
-    Page Should Contain  Hammer
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Hammer")]
 
 Points Must Be Numbers
     Go To Survey  1
@@ -65,16 +65,17 @@ Empty Points Are Interpreted As Zeros
     Click Element  id:survey-1
     Click Link  Add question
     Click Button  Save changes
+    Wait Until Page Contains Element    name:answer_text
     Set Answer Text  No More
     Click Button  Save changes
-    Page Should Contain  Answer 1:
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Answer 1:")]
     Expand Answer Card  1
     Textfield Should Contain  points-1  0
 
 Logged In User Can Delete Answer
     Go To Survey  1
     Click Link  edit-question-1
-    Page Should Contain  Hammer
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Hammer")]
     Expand Answer Card  1
     Click Button  Delete answer
     Handle Alert  Accept

@@ -3,22 +3,22 @@
 {% call survey_elements.card() %}
 <h2 class="py-6">Category Results</h2>
 {% if edit %}
-<div class="pb-6">  
+<div class="pb-6">
     {{ buttons.link_button("Manage Category Results", "/edit_category/%s/%s/new-category-result" % (survey.id,category_id),  "default", "categoryresults")}}
     <br>
 </div>
 {% endif %}
 {% if show_results %}
 {% for result in show_results %}
-    <p>{{ result[0]}} <span style="color:grey">of the max points returns the following result to the user:</span></p>
-    <p>"{{ result[1] }}"</p>
-    <hr style="margin-bottom:10px; margin-top:10px">
-    <!-- <p>AA: {{ result[0]}}
+<p>{{ result[0]}} of the max points returns the following result to the user:</p>
+<p class="text-gray-500">"{{ result[1] }}"</p>
+<hr style="margin-bottom:10px; margin-top:10px">
+<!-- <p>AA: {{ result[0]}}
     <br>BB: {{ result[1] }}</p>
     <br> -->
 {% endfor %}
 {% else %}
-    <p>Category has no results 🥺</p>
+<p>Category has no results 🥺</p>
 {% endif %}
 </div>
 

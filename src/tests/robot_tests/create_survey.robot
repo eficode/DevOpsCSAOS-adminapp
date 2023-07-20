@@ -13,7 +13,7 @@ Logged In User Can Create Surveys
     Login With Correct Credentials
     Click Link  New survey
     Make A Survey
-    Element Should Be Visible  id:notification
+    Wait Until Element Is Visible  id:notification
     Page Should Contain  Testi survey was created
     Page Should Contain  Testi
     Page Should Contain  Toimiikohan
@@ -24,7 +24,7 @@ Logged In User Can Create Surveys
 Logged In User Cannot Create Surveys Without Name
     Click Link  New survey
     Make Survey Without Name
-    Page Should Contain  Create a new survey
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Create a new survey")]
     Page Should Not Contain  Statistics
     Page Should Not Contain  Survey has no questions
 
@@ -43,11 +43,11 @@ Logged In User Cannot Create Surveys Without Text
 A New Survey Does Not Contain Questions
     Click Link  New survey
     Make A Survey
-    Page Should Contain  Survey has no questions
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Survey has no questions")]
 
 Questions Of Survey Are Displayed On Survey Page
     Go To Survey  1
-    Page Should Contain  Question 1
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Question 1")]
     Page Should Contain  Question 2
     Page Should Contain  Question 3
     Page Should Contain  Question 4
@@ -57,10 +57,10 @@ Questions Of Survey Are Displayed On Survey Page
 Logged Out User Cannot Create Surveys
     Logout
     Go To Create New Survey Page
-    Page Should Contain  Please login
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Please login")]
 
 Logged Out User Cannot See Surveys
     Go To Survey  1
-    Page Should Contain  Please login
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Please login")]
     Go To Home Page
-    Page Should Contain  Please login
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Please login")]

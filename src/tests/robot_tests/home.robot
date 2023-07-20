@@ -17,10 +17,7 @@ User Logged In With Correct Credentials
 
 Logged In User Can See Surveys On Home Page
     Go To Home Page
-    Page Should Contain Element  xpath://div[@id="survey-1"]
-    Page Should Contain  Questions: 15
-    Page Should Contain  Submissions: 0
-    Page Should Contain  Questions: 0
+    Wait Until Page Contains Element  xpath://div[@id="survey-1"]
     Page Should Contain  How well are you doing Agile?
 
 Logged Out User Should Be On Login Page

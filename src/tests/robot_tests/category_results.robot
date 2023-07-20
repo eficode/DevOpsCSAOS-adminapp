@@ -15,10 +15,10 @@ Logged In User Can View Category Results
     Login With Correct Credentials
     Go To Survey  1
     Click Link  edit_button_1
-    Page Should Contain  0% - 40% of the max points
+    Wait Until Page Contains  0% - 40% of the max points
     Page Should Contain  Dynamically fetched feedback text for category score.
     Click Element  categoryresults
-    Page Should Contain   Category results for Category 1
+    Wait Until Page Contains  Category results for Category 1
 
 Logged In User Can Delete Category Results
     Go To Survey  1
@@ -46,7 +46,8 @@ User Can Create Subsequent Category Results With Cutoff Values Between 0 And 1
     Set Result Cutoff  0.5
     Save Result
     Expand Result Card  2
-    Page Should Contain  Category result cutoff 0.5
+    Wait Until Page Contains  Category result cutoff 0.5
+
 
 User Can Not Create Category Results With Cutoff Values Above 1
     Go To Survey  2
@@ -66,18 +67,19 @@ User Can Edit A Category Result
     Expand Result Card  1
     Edit Result  New Cutoff Text one  0.2  1
     Save Result
-    Page Should Contain  Result at cutoff point 0.2
+    Wait Until Page Contains  Result at cutoff point 0.2:
     Expand Result Card  1
-    Page Should Contain  New Cutoff Text
+    Wait Until Page Contains  New Cutoff Text
+
 
 Category Result Cannot Be Edited To Have Duplicate Cutoffs
     Go To Survey  2
     Click Link  edit_button_8
     Click Element  categoryresults
     Expand Result Card  1
-    Page Should Contain  New Cutoff Text one
+    Wait Until Page Contains  New Cutoff Text one
     Edit Result  New Cutoff Text two  1  1
     Save Result
-    Page Should Contain  There must not be any identical cutoff values
+    Wait Until Page Contains  There must not be any identical cutoff values
     Expand Result Card  1
-    Page Should Contain  New Cutoff Text one
+    Wait Until Page Contains  New Cutoff Text one

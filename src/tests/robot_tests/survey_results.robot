@@ -10,15 +10,16 @@ Test Setup  Go To Home Page
 
 *** Test Cases ***
 User Can Create New Survey Result
-     Go To Backdoor Login Page
-     Login With Correct Credentials
-     Go To Survey  8
-     Click Link  Manage results
-     Set Result Text  You most resemble an African elephant
-     Save Result
-     Page Should Contain  Result at cutoff point 1.0:
-     Expand Result Card  1
-     Page Should Contain  You most resemble an African elephant
+    Go To Backdoor Login Page
+    Login With Correct Credentials
+    Go To Survey  8
+    Click Link  Manage results
+    Set Result Text  You most resemble an African elephant
+    Save Result
+    Wait Until Page Contains  Result at cutoff point 1.0:
+    Expand Result Card  1
+    Wait Until Page Contains  You most resemble an African elephant
+
 
 First Survey Result Must Have Cutoff Value Of One
     Go To Survey  7
@@ -34,9 +35,10 @@ User Can Create Subsequent Survey Results With Cutoff Values Between 0 And 1
     Set Result Text  You look like an Indian elephant
     Set Result Cutoff  0.5
     Save Result
-    Page Should Contain  Result at cutoff point 0.5:
+    Wait Until Page Contains  Result at cutoff point 0.5:
     Expand Result Card  1
-    Page Should Contain  You look like an Indian elephant
+    Wait Until Page Contains  You look like an Indian elephant
+
 
 Survey Results Can't Have Duplicate Cutoff Values
     Go To Survey  8
@@ -80,7 +82,7 @@ Survey Result With Cutoff Value One Can not Be Deleted
 New Survey Has Survey Result For Cutoff Value 1.0
     Click Link  New survey
     Make A Survey
-    Page Should Contain  0% - 100% of the max points
+    Wait Until Page Contains  0% - 100% of the max points
     Page Should Contain  Your skills in this topic are excellent!
 
 Survey Result Can Be Edited
@@ -89,22 +91,22 @@ Survey Result Can Be Edited
     Set Result Text  You hate elephants
     Set Result Cutoff  0
     Save Result
-    Page Should Contain  Result at cutoff point 0.0:
+    Wait Until Page Contains  Result at cutoff point 0.0:
     Expand Result Card  1
-    Page Should Contain  You hate elephants
+    Wait Until Page Contains  You hate elephants
     Edit Result  You love elephants  0.98  1
     Save Result
-    Wait Until Page Contains Element  xpath: //*[contains(text(), "Result at cutoff point 0.98:")]
+    Wait Until Page Contains  Result at cutoff point 0.98:
     Expand Result Card  1
-    Page Should Contain  You love elephants
+    Wait Until Page Contains  You love elephants
 
 Survey Result Cannot Be Edited To Have Duplicate Cutoffs
     Go To Survey  8
     Click Link  Manage results
     Expand Result Card  1
-    Page Should Contain  You love elephants
+    Wait Until Page Contains  You love elephants
     Edit Result  You hate elephants  1  1
     Save Result
-    Page Should Contain  There must not be any identical cutoff values
+    Wait Until Page Contains  There must not be any identical cutoff values
     Expand Result Card  1
-    Page Should Contain  You love elephants
+    Wait Until Page Contains  You love elephants

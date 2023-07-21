@@ -1,13 +1,14 @@
 {% import "components/macros/survey_elements.html" as survey_elements %}
 
 {% call survey_elements.card() %}
-<h2 class="py-6">Category Results</h2>
-{% if edit %}
-<div class="pb-6">
-    {{ buttons.link_button("Manage Category Results", "/edit_category/%s/%s/new-category-result" % (survey.id,category_id),  "default", "categoryresults")}}
-    <br>
+<div class="flex justify-between items-center pb-6">
+    <h2>Category Results</h2>
+    {% if edit %}
+    <div>
+        {{ buttons.link_button("Manage Category Results", "/edit_category/%s/%s/new-category-result" % (survey.id,category_id),  "default", "categoryresults")}}
+    </div>
+    {% endif %}
 </div>
-{% endif %}
 {% if show_results %}
 {% for result in show_results %}
 <p>{{ result[0]}} of the max points returns the following result to the user:</p>

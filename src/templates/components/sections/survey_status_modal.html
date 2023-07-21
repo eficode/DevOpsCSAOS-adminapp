@@ -26,12 +26,12 @@
 {% if dictionary.items()|length > 0 %}
 <p class="font-medium">{{ label }}</p>
 <ul class="list-disc list-inside">
-{% for  key, value in dictionary.items() %}
+    {% for  key, value in dictionary.items() %}
     <li>{{ key }}</li>
     {% for category in value %}
     <li class="ml-4 font-light">{{ category }}</li>
     {% endfor %}
-{% endfor %}
+    {% endfor %}
 </ul>
 {% endif %}
 
@@ -89,7 +89,8 @@
     <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
         <div class="flex flex-col gap-2">
             <!-- Modal header -->
-            <div class="flex justify-between items-center {{ bg_color }} text-white text-xl rounded-t-md py-2 px-4 capitalize">
+            <div
+                class="flex justify-between items-center {{ bg_color }} text-white text-xl rounded-t-md py-2 px-4 capitalize">
                 <h3>{{ label_text }}</h3>
             </div>
 
@@ -98,7 +99,7 @@
 
             <div class="py-2 px-4 bg-slate-100 flex rounded-md items-center gap-2">
                 <button
-                    class="bg-slate-50 m-0 hover:bg-slate-200 border-slate-200 border-2 p-4 rounded w-full h-fit text-lg text-slate-700 leading-tight focus:ring-slate-200 focus:border-slate-500 transition duration-150 ease-in-out"
+                    class="bg-slate-50 m-0 hover:bg-slate-200 border-slate-200 border-2 p-4 rounded w-full h-fit text-lg text-gray-700 leading-tight focus:ring-slate-200 focus:border-slate-500 transition duration-150 ease-in-out"
                     type="button" onclick="closeModal('survey-status-modal')" id="modal-cancel-button">
                     Close
                 </button>

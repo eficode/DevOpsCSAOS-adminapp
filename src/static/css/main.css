@@ -394,7 +394,7 @@ input::-moz-placeholder,
 textarea::-moz-placeholder {
   opacity: 1;
   /* 1 */
-  color: var(--warm-gray);
+  color: rgb(var(--warm-gray-dark));
   /* 2 */
 }
 
@@ -402,7 +402,7 @@ input::placeholder,
 textarea::placeholder {
   opacity: 1;
   /* 1 */
-  color: var(--warm-gray);
+  color: rgb(var(--warm-gray-dark));
   /* 2 */
 }
 
@@ -1087,7 +1087,7 @@ p {
 
 .border-slate-200 {
   --tw-border-opacity: 1;
-  border-color: rgb(var(--warm-gray) / var(--tw-border-opacity));
+  border-color: rgb(var(--warm-gray-dark) / var(--tw-border-opacity));
 }
 
 .border-slate-300 {
@@ -1387,7 +1387,7 @@ p {
 
 .text-gray-700 {
   --tw-text-opacity: 1;
-  color: rgb(var(--indigo) / var(--tw-text-opacity));
+  color: rgb(var(--indigo-light) / var(--tw-text-opacity));
 }
 
 .text-sky-500 {
@@ -1704,12 +1704,12 @@ p {
 
   .dark\:placeholder-gray-400::-moz-placeholder {
     --tw-placeholder-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-placeholder-opacity));
+    color: rgb(var(--warm-gray) / var(--tw-placeholder-opacity));
   }
 
   .dark\:placeholder-gray-400::placeholder {
     --tw-placeholder-opacity: 1;
-    color: rgb(var(--warm-gray-dark) / var(--tw-placeholder-opacity));
+    color: rgb(var(--warm-gray) / var(--tw-placeholder-opacity));
   }
 
   .dark\:hover\:bg-blue-700:hover {

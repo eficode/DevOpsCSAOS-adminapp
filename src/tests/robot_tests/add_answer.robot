@@ -70,7 +70,7 @@ Empty Points Are Interpreted As Zeros
     Click Button  Save changes
     Wait Until Page Contains Element  xpath: //*[contains(text(), "Answer 1:")]
     Expand Answer Card  1
-    Textfield Should Contain  points-1  0
+    Wait Until Element Contains  id:points-1  0
 
 Logged In User Can Delete Answer
     Go To Survey  1

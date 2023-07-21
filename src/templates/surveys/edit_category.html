@@ -5,89 +5,100 @@
 {% import "components/macros/tooltip.html" as tooltip %}
 {% block content %}
 
-<div class="flex justify-between">
-    {% if edit %}
-    <h2 class="text-gray-900">Edit a category in {{ survey.name }}</h2>
-    {{ buttons.link_button("Back to survey", "/surveys/%s" % survey_id) }}
-    {% else %}
-    <h2 class="text-gray-900">New category for {{ survey.name }}</h2>
-    {{ buttons.link_button("Back to survey", "/surveys/%s" % survey_id) }}
-    {% endif %}
-</div>
+<p class="text-sky-700 text-base lg:col-span-2 hover:text-sky-700 hover:underline font-medium rounded-lg">
+    <a href="/surveys/{{survey.id}}">&larr; Back to survey</a>
+</p>
+
 <div class="grid lg:grid-cols-2 grid-cols-1 gap-8 items-start">
-    {% call survey_elements.card() %}
-    <form action="/edit_category" method="POST" onsubmit="return confirmationCheck()">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <input type="hidden" name="survey_id" id="survey_id" value={{survey_id}}>
-        <input type="hidden" name="category_id" id="category_id" value={{category_id}}>
-        <input type="hidden" name="edit" id="edit" value="{{ edit }}">
-        <input type="hidden" name="stay" id="stay"></input>
-        <div class="flex flex-col gap-6">
-            <div class="flex flex-col gap-4">
-                <div class="flex flex-col gap-2 w-full">
-                    {{ form_elements.label("name", "Name") }}
-                    {{ form_elements.text_area("name", "Name", "", true, name) }}
-                </div>
-                <div class="flex flex-col gap-2 w-full">
-                    {{ form_elements.label("description", "Description") }}
-                    {{ form_elements.text_area("description", "Description", "", true, description) }}
-                </div>
-                {% if content_links %}
-                <div class="flex flex-col gap-2 w-full">
-                    {% for content in content_links %}
-                    <div class="relative flex py-5 items-center gap-2">
-                        <span class="flex-shrink text-slate-600 ">Content link {{ loop.index }}</span>
-                        {{ tooltip.tooltip("A content link is displayed to the user after filling the survey") }}
-                        <div class="flex-grow border-t border-slate-200"></div>
-                    </div>
-                    <div class="flex flex-col gap-2 w-full">
-                        {{ form_elements.label('type_'+loop.index0 | string, "Content link type") }}
-                        {{ form_elements.text_area('type_'+loop.index0 | string, "Content link type", "", false,
-                            value=content['type'])}}
-                    </div>
-                    <div class="flex flex-col gap-2 w-full">
-                        {{ form_elements.label('url_'+loop.index0 | string, "Content link URL") }}
-                        {{ form_elements.text_area('url_'+loop.index0 | string, "Content link URL", "", false,
-                            value=content['url'])}}
-                    </div>
-                    <!-- Delete button clears the url and submits the form.
-                         The form handler wont add a content link with an empty url field -->
-                    <p id="helper" style="display:none"></p>
-                    {% set on_click = " document.getElementById('helper').innerHTML='trigger confirmation'; document.getElementsByName('url_" ~ loop.index0 ~ "')[0].value=''" %}
-                    {% set button_id = "delete_url_" ~ loop.index0 %}
-                    {{ form_elements.submit_button("Delete", type="destructive", onclick=on_click, id=button_id) }}
-                    {% endfor %}
-                </div>
-                {% endif %}
-                {{ form_elements.submit_button("Save", "default") }}
-            </div>
-        </div>
-        {% endcall %}
+    <div class="flex flex-col gap-6">
         {% if edit %}
-        <div class="flex flex-col gap-6">
-            <h2 class="text-gray-900">Add content link</h2>
-            {% call survey_elements.card() %}
+        <h2 class="text-gray-900">Edit a category in {{ survey.name }}</h2>
+        {% else %}
+        <h2 class="text-gray-900">New category for {{ survey.name }}</h2>
+        {% endif %}
+
+        {% call survey_elements.card() %}
+
+        <form action="/edit_category" method="POST" onsubmit="return confirmationCheck()">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="hidden" name="survey_id" id="survey_id" value={{survey_id}}>
             <input type="hidden" name="category_id" id="category_id" value={{category_id}}>
-            <div class="flex flex-col gap-4">
-                <div class="flex flex-col gap-2 w-full">
-                    {{ form_elements.label("new_type", "Type") }}
-                    {{ form_elements.text_area("new_type", "Type", "", false)}}
+            <input type="hidden" name="edit" id="edit" value="{{ edit }}">
+            <input type="hidden" name="stay" id="stay"></input>
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-2 w-full">
+                        {{ form_elements.label("name", "Name") }}
+                        {{ form_elements.text_area("name", "Name", "", true, name) }}
+                    </div>
+                    <div class="flex flex-col gap-2 pb-6 w-full">
+                        {{ form_elements.label("description", "Description") }}
+                        {{ form_elements.text_area("description", "Description", "", true, description) }}
+                    </div>
+                    {% if content_links %}
+                    <div class="flex flex-col gap-2 w-full">
+                        {% for content in content_links %}
+                        <div class="relative flex items-center gap-2">
+                            <span class="flex-shrink text-gray-900 font-bold">Content link {{ loop.index }}</span>
+                            {{ tooltip.tooltip("A content link is displayed to the user after filling the survey") }}
+                            <div class="flex-grow border-t border-slate-200"></div>
+
+                            <!-- Delete button clears the url and submits the form.
+                                The form handler wont add a content link with an empty url field -->
+                            <p id="helper" style="display:none"></p>
+                            {% set on_click = " document.getElementById('helper').innerHTML='trigger confirmation'; document.getElementsByName('url_" ~ loop.index0 ~ "')[0].value=''" %}
+                            {% set button_id = "delete_url_" ~ loop.index0 %}
+                            {{ form_elements.submit_button("Delete", type="destructive", onclick=on_click, id=button_id, size="small") }}
+                        </div>
+                        <div class="flex flex-col gap-2 w-full">
+                            {{ form_elements.label('type_'+loop.index0 | string, "Content link type") }}
+                            {{ form_elements.text_area('type_'+loop.index0 | string, "Content link type", "", false,
+                            value=content['type'])}}
+                        </div>
+                        <div class="flex flex-col gap-2 pb-6 w-full">
+                            {{ form_elements.label('url_'+loop.index0 | string, "Content link URL") }}
+                            {{ form_elements.text_area('url_'+loop.index0 | string, "Content link URL", "", false,
+                            value=content['url'])}}
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {{ form_elements.submit_button("Save", "default") }}
                 </div>
-                <div class="flex flex-col gap-2 w-full">
-                    {{ form_elements.label("new_url", "URL") }}
-                    {{ form_elements.text_area("new_url", "URL", "", false)}}
-                </div>
-                {{ form_elements.submit_button("Add", "creation", "/add_content_link") }}
             </div>
+            {% endcall %}
+    </div>
+    {% if edit %}
+    <div class="flex flex-col gap-6">
+        <h2 class="text-gray-900">Add content link</h2>
+        {% call survey_elements.card() %}
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <input type="hidden" name="survey_id" id="survey_id" value={{survey_id}}>
+        <input type="hidden" name="category_id" id="category_id" value={{category_id}}>
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2 w-full">
+                {{ form_elements.label("new_type", "Type") }}
+                {{ form_elements.text_area("new_type", "Type", "", false)}}
+            </div>
+            <div class="flex flex-col gap-2 w-full">
+                {{ form_elements.label("new_url", "URL") }}
+                {{ form_elements.text_area("new_url", "URL", "", false)}}
+            </div>
+            {{ form_elements.submit_button("Add", "creation", "/add_content_link") }}
         </div>
+
+
         {% endcall %}
-        {% endif %}
+
+
+        {% include "components/sections/category_results.html" %}
+    </div>
+    {% endif %}
     </form>
-    {% include "components/sections/category_results.html" %}
+
 </div>
-</div>
+
 
 <script>
     function confirmationCheck() {

@@ -9,7 +9,7 @@ Set Result Cutoff
     Input Text  cutoff  ${value}
 
 Save Result
-    Click Button  value:Save changes
+    Click Button  xpath: //*[contains(text(), "Save changes")]
 
 Expand Result Card
     [Arguments]  ${result_index}

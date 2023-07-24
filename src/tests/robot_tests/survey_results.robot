@@ -35,8 +35,8 @@ User Can Create Subsequent Survey Results With Cutoff Values Between 0 And 1
     Set Result Text  You look like an Indian elephant
     Set Result Cutoff  0.5
     Save Result
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.5:
     Expand Result Card  1
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.5
     Wait Until Keyword Succeeds  30s  5s  Page Should Contain  You look like an Indian elephant
 
 
@@ -91,13 +91,13 @@ Survey Result Can Be Edited
     Set Result Text  You hate elephants
     Set Result Cutoff  0
     Save Result
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.0:
     Expand Result Card  1
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.0
     Wait Until Keyword Succeeds  30s  5s  Page Should Contain  You hate elephants
     Edit Result  You love elephants  0.98  1
     Save Result
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.98:
     Expand Result Card  1
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.98
     Wait Until Keyword Succeeds  30s  5s  Page Should Contain  You love elephants
 
 Survey Result Cannot Be Edited To Have Duplicate Cutoffs

@@ -67,8 +67,9 @@ User Can Edit A Category Result
     Expand Result Card  1
     Edit Result  New Cutoff Text one  0.2  1
     Save Result
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.2:
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain Element  expandable-result-1
     Expand Result Card  1
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.2
     Wait Until Keyword Succeeds  30s  5s  Page Should Contain  New Cutoff Text
 
 

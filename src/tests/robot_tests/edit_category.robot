@@ -20,7 +20,7 @@ Logged In User Can Create Categories
 Category Result Module Not Displayed When Creating Category
     Go To Survey  1
     Click Link  Add category
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Category has no results
+    Wait Until Keyword Succeeds  30s  5s  Page Should Not Contain  Category has no results
     Page Should Not Contain  Manage Category Results
 
 Category Edit View Should Display Survey Name
@@ -32,7 +32,8 @@ Category Edit View Should Display Survey Name
 Back Button Opens Correct Survey Page On New Category Page
     Go To Survey  1
     Click Link  Add category
-    Click Link  Back to survey
+    Wait Until Page Contains Element  partial link:Back to survey
+    Click Link  partial link:Back to survey
     Wait Until Keyword Succeeds  30s  5s  Page Should Contain  test_name
     Page Should Contain  test_title
     Page Should Contain  test_text
@@ -40,7 +41,8 @@ Back Button Opens Correct Survey Page On New Category Page
 Back Button Opens Correct Survey Page On Edit Category Page
     Go To Survey  1
     Click Link  edit_button_1
-    Click Link  Back to survey
+    Wait Until Page Contains Element  partial link:Back to survey
+    Click Link  partial link:Back to survey
     Wait Until Keyword Succeeds  30s  5s  Page Should Contain  test_name
     Page Should Contain  test_title
     Page Should Contain  test_text
@@ -65,7 +67,7 @@ Logged In User Can Create Categories Without Content Links
     Page Should Contain  123
     Page Should Contain  Your skills in this topic are excellent!
     Click Element  categoryresults
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 1.0:
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain Element  expandable-result-1
 
 Logged Out User Cannot Create Categories
     Logout

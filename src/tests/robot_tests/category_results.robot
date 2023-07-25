@@ -42,11 +42,11 @@ User Can Create Subsequent Category Results With Cutoff Values Between 0 And 1
     Go To Survey  2
     Click Link  edit_button_8
     Click Element  categoryresults
-    Set Result Text  Category result cutoff 0.5
+    Set Result Text  User Can Create Subsequent Category Results With Cutoff Values Between 0 And 1
     Set Result Cutoff  0.5
     Save Result
     Expand Result Card  2
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Category result cutoff 0.5
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  User Can Create Subsequent Category Results With Cutoff Values Between 0 And 1
 
 
 User Can Not Create Category Results With Cutoff Values Above 1
@@ -65,12 +65,10 @@ User Can Edit A Category Result
     Click Link  edit_button_8
     Click Element  categoryresults
     Expand Result Card  1
-    Edit Result  New Cutoff Text one  0.2  1
-    Save Result
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain Element  expandable-result-1
+    Edit Result  User Can Edit A Category Result  0.2  1
     Expand Result Card  1
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  Result at cutoff point 0.2
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  New Cutoff Text
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain Element  xpath: //*[contains(text(), "0.2")]
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  User Can Edit A Category Result
 
 
 Category Result Cannot Be Edited To Have Duplicate Cutoffs
@@ -78,9 +76,7 @@ Category Result Cannot Be Edited To Have Duplicate Cutoffs
     Click Link  edit_button_8
     Click Element  categoryresults
     Expand Result Card  1
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  New Cutoff Text one
-    Edit Result  New Cutoff Text two  1  1
-    Save Result
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  There must not be any identical cutoff values
+    Edit Result  Category Result Cannot Be Edited To Have Duplicate Cutoffs  1  1
     Expand Result Card  1
-    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  New Cutoff Text one
+    Wait Until Keyword Succeeds  30s  5s  Page Should Contain  There must not be any identical cutoff values
+    Wait Until Keyword Succeeds  30s  5s  Page Should Not Contain  Category Result Cannot Be Edited To Have Duplicate Cutoffs

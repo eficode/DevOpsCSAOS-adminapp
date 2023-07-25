@@ -20,3 +20,5 @@ Edit Result
     [Arguments]  ${result}  ${cutoff}  ${id}
     Input Text  result-${id}  ${result}
     Input Text  cutoff-${id}  ${cutoff}
+    Save Result
+    

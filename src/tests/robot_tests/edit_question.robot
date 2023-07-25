@@ -52,7 +52,7 @@ User Can Not Set Category Weights With A Precision Of 0.01
 Back Button Opens Correct Survey Page
     Go To Survey  1
     Click Link  edit-question-1
-    Click Link  Back to survey
+    Click Link  partial link:Back to survey
     Wait Until Page Contains Element  xpath: //*[contains(text(), "test_name")]
     Page Should Contain  test_title
     Page Should Contain  test_text

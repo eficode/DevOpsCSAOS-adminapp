@@ -17,4 +17,4 @@ Delete An Existing Question
     Go To Survey  1
     Click Delete Question  9
     Go To Survey  1
-    Wait Until Page Does Not Contain  Game of Thrones
+    Wait Until Keyword Succeeds  30s  5s  Page Should Not Contain  Game of Thrones

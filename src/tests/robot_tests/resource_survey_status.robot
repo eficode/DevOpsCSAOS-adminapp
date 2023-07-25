@@ -15,7 +15,7 @@ Create New Category
     Set Category Name  ${name}
     Set Category Description  ${description}
     Click Button  Save
-    Click Link  Back to survey
+    Click Link  partial link:Back to survey
 
 Survey Status Is Red
     Page Should Contain Element  id:status-badge-red

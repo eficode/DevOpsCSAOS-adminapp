@@ -11,6 +11,10 @@ on:
       - 'README.md'
   workflow_dispatch:
 
+env:
+  ADMIN_EMAIL_1: ${{ secrets.ADMIN_EMAIL_1 }}
+  ADMIN_EMAIL_2: ${{ secrets.ADMIN_EMAIL_2 }}
+
 permissions:
   contents: read
 

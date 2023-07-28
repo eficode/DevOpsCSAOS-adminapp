@@ -22,6 +22,8 @@ class Config:
     SECRET_KEY = getenv("SECRET_KEY")
     CLIENT_ID = getenv("GOOGLE_CLIENT_ID")
     ENV = getenv("ENVIRONMENT")
+    ADMIN_EMAIL_1 = getenv("ADMIN_EMAIL_1")
+    ADMIN_EMAIL_2 = getenv("ADMIN_EMAIL_2")
 
     SQLALCHEMY_DATABASE_URI = getenv("DATABASE_URI")
     SQLALCHEMY_TRACK_MODIFICATIONS = False

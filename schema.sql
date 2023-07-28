@@ -463,14 +463,8 @@ ALTER TABLE ONLY public."Users" ALTER COLUMN id SET DEFAULT nextval('public."Use
 -- Data for Name: Admins; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public."Admins" VALUES (1, 'test@gmail.com');
-INSERT INTO public."Admins" VALUES (2, 'rami.piik@gmail.com');
-INSERT INTO public."Admins" VALUES (3, 'antti.vainikka36@gmail.com');
-INSERT INTO public."Admins" VALUES (4, 'jatufin@gmail.com');
-INSERT INTO public."Admins" VALUES (5, 'me@juan.fi');
-INSERT INTO public."Admins" VALUES (6, 'niemi.leo@gmail.com');
-INSERT INTO public."Admins" VALUES (7, 'oskar.sjolund93@gmail.com');
-INSERT INTO public."Admins" VALUES (8, 'siljaorvokki@gmail.com');
+INSERT INTO public."Admins" VALUES (1, :'ADMIN_EMAIL_1');
+INSERT INTO public."Admins" VALUES (2, :'ADMIN_EMAIL_2');
 
 
 --

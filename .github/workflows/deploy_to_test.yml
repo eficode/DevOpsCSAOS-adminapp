@@ -84,4 +84,27 @@ jobs:
           invoke init-db ${{secrets.TEST_DB_URI}}
       - name: Run e2e tests
         run: |
-          robot -v URL:https://test-superadmin3000.herokuapp.com/ src/tests/robot_tests/
+          robot -d reports -v URL:https://test-superadmin3000.herokuapp.com/ src/tests/robot_tests/
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: reports
+          path: reports
+  generate_report:
+    if: always()
+    needs: [e2e_tests_on_heroku_test_environment]
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download reports
+        uses: actions/download-artifact@v1
+        with:
+          name: reports
+      - name: Send report to commit
+        uses: joonvena/robotframework-reporter-action@v2.1
+        with:
+          gh_access_token: ${{ secrets.GITHUB_TOKEN }}

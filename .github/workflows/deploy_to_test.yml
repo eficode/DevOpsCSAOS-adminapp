@@ -15,9 +15,6 @@ env:
   ADMIN_EMAIL_1: ${{ secrets.ADMIN_EMAIL_1 }}
   ADMIN_EMAIL_2: ${{ secrets.ADMIN_EMAIL_2 }}
 
-permissions:
-  contents: read
-
 jobs:
   build_and_unit_test:
     runs-on: ubuntu-latest
@@ -75,6 +72,10 @@ jobs:
           pip install invoke
       - name: Setup chromedriver
         uses: nanasess/setup-chromedriver@master
+        with:
+          # Workaround due to this issue:
+          # https://github.com/nanasess/setup-chromedriver/issues/199
+          chromedriver-version: '115.0.5790.102'
       - run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
@@ -85,26 +86,12 @@ jobs:
       - name: Run e2e tests
         run: |
           robot -d reports -v URL:https://test-superadmin3000.herokuapp.com/ src/tests/robot_tests/
-      - name: Upload test results
-        uses: actions/upload-artifact@v2
-        if: always()
+      - name: Save commit sha and upload artifact
+        run: |
+          mkdir -p ./sha
+          cp -r reports ./sha/reports
+          echo ${{ github.sha }} > ./sha/NR
+      - uses: actions/upload-artifact@v3
         with:
-          name: reports
-          path: reports
-  generate_report:
-    if: always()
-    needs: [e2e_tests_on_heroku_test_environment]
-    runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v2
-      - name: Download reports
-        uses: actions/download-artifact@v1
-        with:
-          name: reports
-      - name: Send report to commit
-        uses: joonvena/robotframework-reporter-action@v2.1
-        with:
-          gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+          name: sha
+          path: sha/

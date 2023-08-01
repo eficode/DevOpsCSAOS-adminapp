@@ -10,6 +10,7 @@ Set Result Cutoff
 
 Save Result
     Click Button  xpath: //*[contains(text(), "Save changes")]
+    Sleep  2s
 
 Expand Result Card
     [Arguments]  ${result_index}
@@ -18,7 +19,7 @@ Expand Result Card
 
 Edit Result
     [Arguments]  ${result}  ${cutoff}  ${id}
-    Input Text  result-${id}  ${result}
-    Input Text  cutoff-${id}  ${cutoff}
+    Input Text  result-${id}  ${result}  clear=True
+    Input Text  cutoff-${id}  ${cutoff}  clear=True
     Save Result
     

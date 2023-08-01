@@ -74,12 +74,12 @@ Empty Points Are Interpreted As Zeros
     
 Logged In User Can Delete Answer
     Go To Survey  1
-    Click Link  edit-question-1
-    Wait Until Page Contains Element  xpath: //*[contains(text(), "Hammer")]
+    Click Link  edit-question-2
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Edit a question")]
     Expand Answer Card  1
     Click Button  Delete answer
     Handle Alert  Accept
-    Page Should Not Contain  Hammer
+    Page Should Not Contain Element  xpath: //*[contains(text(), "Strongly Disagree")]
 
 Logged In User Can Edit Answers And Question While Creating Answer
     Click Link  New survey

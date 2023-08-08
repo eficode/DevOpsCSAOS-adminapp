@@ -1,4 +1,5 @@
 from ast import excepthandler
+from os import getenv
 import unittest
 import uuid
 from datetime import datetime, timedelta
@@ -21,7 +22,7 @@ class TestSurveyRepository(unittest.TestCase):
 
     def test_authorized_google_login_with_valid_email_succeeds(self):
 
-        valid_email = "jatufin@gmail.com"
+        valid_email = getenv('ADMIN_EMAIL_1')
 
         with self.app.app_context():
             response = self.repo.authorized_google_login(valid_email)
@@ -30,7 +31,7 @@ class TestSurveyRepository(unittest.TestCase):
 
     def test_authorized_google_login_with_invalid_email_fails(self):
 
-        valid_email = "jatufin@gmail.invalid"
+        valid_email = "test@gmail.invalid"
 
         with self.app.app_context():
             response = self.repo.authorized_google_login(valid_email)
@@ -443,7 +444,7 @@ class TestSurveyRepository(unittest.TestCase):
         with self.app.app_context():
             response = self.repo.add_admin("test@email.com")
 
-        self.assertEqual(response, 9)
+        self.assertIsNotNone(response)
 
     def test_get_all_admins_returns_multiple_admins(self):
 
@@ -527,7 +528,7 @@ class TestSurveyRepository(unittest.TestCase):
             self.assertFalse(response)
 
     def test_admin_exists_returns_true_when_admin_found(self):
-        email = "test@gmail.com"
+        email = getenv('ADMIN_EMAIL_2')
         with self.app.app_context():
             response = self.repo._admin_exists(email)
         self.assertTrue(response)
@@ -539,7 +540,7 @@ class TestSurveyRepository(unittest.TestCase):
         self.assertFalse(response)
 
     def test_add_admin_does_not_add_email_if_email_found_in_db(self):
-        email = "test@gmail.com"
+        email = getenv('ADMIN_EMAIL_1')
         with self.app.app_context():
             response = self.repo.add_admin(email)
         self.assertIsNone(response)

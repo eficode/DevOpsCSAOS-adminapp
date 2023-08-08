@@ -58,7 +58,7 @@ def init_db(ctx, db):
     drop_tables=' '.join([beginning1,db,end1])
     ctx.run(drop_tables)
 
-    beginning2="psql -d"
+    beginning2="psql -v ADMIN_EMAIL_1=\"$ADMIN_EMAIL_1\" -v ADMIN_EMAIL_2=\"$ADMIN_EMAIL_2\" -d"
     end2="-f schema.sql"
     create_tables=' '.join([beginning2,db,end2])
     ctx.run(create_tables)

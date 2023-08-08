@@ -22,5 +22,6 @@ Survey Status is Green After Adding Category Question And Answer
     Create New Category  Alertness  How alerted are you
     Add New Question  When?  1
     Add New Answer  Now  1
-    Click Link  Back to survey
+    Wait Until Page Contains Element  partial link:Back to survey
+    Click Link  partial link:Back to survey
     Survey Status Is Green

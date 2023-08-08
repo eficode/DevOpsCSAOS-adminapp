@@ -16,30 +16,31 @@ Logged In User Can Edit a Question
     Click Link  edit-question-1
     Add New Question  changed  99.0
     Click Button  Save changes
-    Page Should Contain  changed
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "changed")]
     Page Should Not Contain  Question 1
     Go To Survey  1
     Click Link  edit-question-1
     Textfield Should Contain  cat1  99.0
-    Page Should Contain  changed
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "changed")]
+
 
 Editing Without Changing Anything Works
     Go To Survey  1
     Click Link  edit-question-1
     Add Question Without Arguments
-    Page Should Contain  changed
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "changed")]
 
 Edit Question View Should Display Survey Name
     Go To Survey  1
     Click Link  edit-question-1
-    Page Should Contain  test_name
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "test_name")]
 
 User Can Set Category Weights With A Precision Of 0.1
     Go To Survey  1
     Click Link  edit-question-1
     Add New Question  weight  1.1
     Click Button  Save changes
-    Page Should Contain  weight
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "weight")]
 
 User Can Not Set Category Weights With A Precision Of 0.01
     Go To Survey  1
@@ -51,8 +52,8 @@ User Can Not Set Category Weights With A Precision Of 0.01
 Back Button Opens Correct Survey Page
     Go To Survey  1
     Click Link  edit-question-1
-    Click Link  Back to survey
-    Page Should Contain  test_name
+    Click Link  partial link:Back to survey
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "test_name")]
     Page Should Contain  test_title
     Page Should Contain  test_text
 
@@ -60,7 +61,7 @@ User Can Navigate To the Next Question
     Go To Survey  1
     Click Link  edit-question-1
     Click Link  Next question
-    Page Should Contain  Question 2
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "Question 2")]
 
 Previous Button Does Not Exist for the First Questions
     Go To Survey  1
@@ -78,4 +79,4 @@ User Can Navigate To the Previous Questions
     Click Link  edit-question-1
     Click Link  Next question
     Click Link  Previous question
-    Page Should Contain  weight
+    Wait Until Page Contains Element  xpath: //*[contains(text(), "weight")]

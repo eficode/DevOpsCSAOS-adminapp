@@ -9,11 +9,11 @@ on:
     paths-ignore:
       - 'Documentation/**'
       - 'README.md'
-
   workflow_dispatch:
 
-permissions:
-  contents: read
+env:
+  ADMIN_EMAIL_1: ${{ secrets.ADMIN_EMAIL_1 }}
+  ADMIN_EMAIL_2: ${{ secrets.ADMIN_EMAIL_2 }}
 
 jobs:
   build_and_unit_test:
@@ -72,6 +72,10 @@ jobs:
           pip install invoke
       - name: Setup chromedriver
         uses: nanasess/setup-chromedriver@master
+        with:
+          # Workaround due to this issue:
+          # https://github.com/nanasess/setup-chromedriver/issues/199
+          chromedriver-version: '115.0.5790.102'
       - run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
@@ -81,4 +85,13 @@ jobs:
           invoke init-db ${{secrets.TEST_DB_URI}}
       - name: Run e2e tests
         run: |
-          robot -v URL:https://test-superadmin3000.herokuapp.com/ src/tests/robot_tests/
+          robot -d reports -v URL:https://test-superadmin3000.herokuapp.com/ src/tests/robot_tests/
+      - name: Save commit sha and upload artifact
+        run: |
+          mkdir -p ./sha
+          cp -r reports ./sha/reports
+          echo ${{ github.sha }} > ./sha/NR
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sha
+          path: sha/

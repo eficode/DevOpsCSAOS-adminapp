@@ -5,6 +5,9 @@
 {% import "components/macros/buttons.html" as buttons %}
 
 {% block content %}
+<p class="text-sky-700 text-base lg:col-span-2 hover:text-sky-700 hover:underline font-medium rounded-lg">
+    <a href="/surveys/{{survey.id}}">&larr; Back to survey</a>
+</p>
 <div class="flex justify-between">
     {% if edit %}
     <h1 class="text-slate-700">Edit a question in {{ survey.name }}</h1>
@@ -13,24 +16,19 @@
     {% endif %}
 </div>
 <div class="grid grid-cols-2 gap-4">
-    <div class="flex flex-col gap-6">
-        {{ buttons.link_button("Back to survey", "/surveys/%s" % survey[0]) }}
-    </div>
     <div class="flex flex-col gap-2">
         <div class="flex justify-end">
-            {% if show_previous_button %}          
-                <a href="/surveys/{{survey[0]}}/questions/{{question_id}}/previous"
-                    id={{question_id}}
-                    class="p-2 block rounded w-fit h-fit bg-sky-500 text-sm text-white font-medium leading-tight hover:bg-sky-700 focus:bg-sky-700 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                    style="margin-right:15px"
-                >
-                    Previous question
-                </a>
+            {% if show_previous_button %}
+            <a href="/surveys/{{survey[0]}}/questions/{{question_id}}/previous" id={{question_id}}
+                class="p-2 block rounded w-fit h-fit bg-sky-500 text-sm text-white font-medium leading-tight hover:bg-sky-700 focus:bg-sky-700 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                style="margin-right:15px">
+                Previous question
+            </a>
             {% endif %}
-            {% if show_next_button %}  
-                {{ buttons.link_button("Next question", "/surveys/%s/questions/%s/next" % (survey[0],  question_id)) }}
+            {% if show_next_button %}
+            {{ buttons.link_button("Next question", "/surveys/%s/questions/%s/next" % (survey[0],  question_id)) }}
             {% else %}
-            <span  class="p-2 block rounded  text-sm text-white font-medium" style="cursor:default; user-select: none">
+            <span class="p-2 block rounded  text-sm text-white font-medium" style="cursor:default; user-select: none">
                 Next question
             </span>
             {% endif %}
@@ -38,7 +36,8 @@
     </div>
 </div>
 <div class="flex flex-col gap-6 items-start w-full">
-    <form class="w-full" action="/surveys/{{ survey.id }}/new-question" method="POST" onsubmit="return confirmationCheck()">
+    <form class="w-full" action="/surveys/{{ survey.id }}/new-question" method="POST"
+        onsubmit="return confirmationCheck()">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="hidden" name="survey_id" id="survey_id" value="{{ survey.id }}">
         <input type="hidden" name="question_id" id="question_id" value="{{ question_id }}">
@@ -99,20 +98,17 @@
             {% endif %}
         </div>
     </form>
-    {% if edit %}
-        {{ buttons.link_button("Back to survey", "/surveys/%s" % survey[0]) }}
-    {% endif %}
 </div>
 
-<script>  
-    function confirmationCheck() {   
-        command=document.getElementById('helper').innerHTML
+<script>
+    function confirmationCheck() {
+        command = document.getElementById('helper').innerHTML
         if (command == 'trigger confirmation') {
-            answer=confirm('Are you sure you want to delete the answer?')
-        } 
-        if (!answer) {return false}
+            answer = confirm('Are you sure you want to delete the answer?')
+        }
+        if (!answer) { return false }
         return true
     }  
-</script> 
+</script>
 
 {% endblock %}

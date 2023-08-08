@@ -15,16 +15,16 @@ Create New Category
     Set Category Name  ${name}
     Set Category Description  ${description}
     Click Button  Save
-    Click Link  Back to survey
+    Click Link  partial link:Back to survey
 
 Survey Status Is Red
-    Page Should Contain Element  id:status-badge-red
+    Wait Until Page Contains Element  id:status-badge-red
 
 Survey Status Is Yellow
-    Page Should Contain Element  id:status-badge-yellow
+    Wait Until Page Contains Element  id:status-badge-yellow
 
 Survey Status Is Green
-    Page Should Contain Element  id:status-badge-green
+    Wait Until Page Contains Element  id:status-badge-green
 
 
 Add New Question

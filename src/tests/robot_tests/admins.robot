@@ -19,7 +19,6 @@ Logged In User Can View Admins
     Page Should Contain  Email address
     Page Should Contain  id
     Page Should Contain  Email
-    Page Should Contain  9
     Page Should Contain  jorma@uotinen.net
 
 Logged Out User Cannot View Admins

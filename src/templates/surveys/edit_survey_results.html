@@ -5,13 +5,19 @@
 {% import "components/macros/buttons.html" as buttons %}
 
 {% block content %}
+
+<p class="text-sky-700 text-base lg:col-span-2 hover:text-sky-700 hover:underline font-medium rounded-lg">
+    <a href="/surveys/{{survey.id}}">&larr; Back to survey</a>
+</p>
+
 <div class="flex justify-between">
-    <h1 class="text-slate-700">Survey results for {{ survey.name }}</h1>
+    <h1 class="text-gray-900">Survey results for {{ survey.name }}</h1>
 </div>
-{{ buttons.link_button("Back to survey", "/surveys/%s" % survey[0]) }}
+
 <div class="flex flex-col gap-6 items-start w-full">
-    <h1 class="text-slate-700">Add a result</h1>  
-    <form class="w-full" action="/surveys/{{ survey.id }}/new-survey-result" method="POST" onsubmit="return confirmationCheck()">
+    <h1 class="text-gray-900">Add a result</h1>
+    <form class="w-full" action="/surveys/{{ survey.id }}/new-survey-result" method="POST"
+        onsubmit="return confirmationCheck()">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="hidden" name="survey_id" id="survey_id" value="{{ survey.id }}">
         <input type="hidden" name="results" id="results" value="{{ results }}">
@@ -22,48 +28,48 @@
                     <div class="flex flex-col gap-2 w-full">
                         {% set upper_bound = 1.0 %}
                         {% if first %}
-                            {% set lower_bound = 1.0 %}
-                        {% else %}    
-                            {% set lower_bound = 0.0 %}
+                        {% set lower_bound = 1.0 %}
+                        {% else %}
+                        {% set lower_bound = 0.0 %}
                         {% endif %}
-                            {{ form_elements.label("text", "Result text") }}
-                            {{ form_elements.text_area("text", "Result", "Your skills in this topic are excellent!", false, text) }}
-                            {{ form_elements.label("cutoff", "Cutoff from maximum points") }}
-                            {{ form_elements.number_input("cutoff", "new-cutoff", "Cutoff from max points", 1.0, false, lower_bound, upper_bound, 0.01, 1.0) }}
+                        {{ form_elements.label("text", "Result text") }}
+                        {{ form_elements.text_area("text", "Result", "Your skills in this topic are excellent!", false, text) }}
+                        {{ form_elements.label("cutoff", "Cutoff from maximum points") }}
+                        {{ form_elements.number_input("cutoff", "new-cutoff", "Cutoff from max points", 1.0, false, lower_bound, upper_bound, 0.01, 1.0) }}
                     </div>
                     {{ form_elements.submit_button("Save changes") }}
-                </div>                    
+                </div>
             </div>
     </form>
-    </div>
-    <div class="w-full">
-        <p id="helper" style="display:none">xxx</p>
-        {% endcall %}
-        {% if results %}
-            {% for result in results %}
-                {% if result[2] == 1.0 %}     
-                    {{ survey_elements.survey_result_card(result, loop.index, hide_delete_button=True, lock_cutoff_value=True) }}
-                {% else %}
-                    {{ survey_elements.survey_result_card(result, loop.index) }}
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            <p>Survey has no results 🥺</p>
-        {% endif %}
-    </div>
+</div>
+<div class="w-full">
+    <p id="helper" style="display:none">xxx</p>
+    {% endcall %}
+    {% if results %}
+    {% for result in results %}
+    {% if result[2] == 1.0 %}
+    {{ survey_elements.survey_result_card(result, loop.index, hide_delete_button=True, lock_cutoff_value=True) }}
+    {% else %}
+    {{ survey_elements.survey_result_card(result, loop.index) }}
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <p>Survey has no results 🥺</p>
+    {% endif %}
+</div>
 </div>
 
-<script>  
-    function confirmationCheck() {   
-        command=document.getElementById('helper').innerHTML
+<script>
+    function confirmationCheck() {
+        command = document.getElementById('helper').innerHTML
         if (command == 'trigger confirmation') {
-            answer=confirm('Are you sure you want to delete the result?')
-        } 
+            answer = confirm('Are you sure you want to delete the result?')
+        }
         if (!answer) {
             return false
         }
         return true
     }  
-</script>  
+</script>
 
 {% endblock %}

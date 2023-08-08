@@ -12,7 +12,7 @@
 {% endif %}
 
 <input type="text" name="{{ name }}" placeholder="{{ placeholder }}" value="{{ value }}"
-    class="bg-white border border-slate-300 text-gray-900 text-sm rounded-lg focus:invalid:border-rose-500 focus:ring-sky-500 focus:border-sky-500  block w-full p-2"
+    class="bg-white border border-slate-300 text-sm rounded-lg focus:invalid:border-rose-500 focus:ring-sky-500 focus:border-sky-500  block w-full p-2"
     {{ required_text }}>
 
 {% endmacro %}
@@ -51,7 +51,7 @@
 
 
 <textarea type="text" name="{{name}}" placeholder="{{ placeholder }}"
-    class="bg-white border border-slate-300 text-gray-900 text-sm rounded-lg focus:invalid:border-rose-500 focus:ring-sky-500 focus:border-sky-500 block w-full p-2"
+    class="bg-white border border-slate-300 text-sm rounded-lg focus:invalid:border-rose-500 focus:ring-sky-500 focus:border-sky-500 block w-full p-2"
     {{ required_text }}>{{ value }}</textarea>
 
 {% endmacro %}
@@ -74,19 +74,20 @@
 {% set required_text = 'required' %}
 {% endif %}
 
-<input type="number" value="{{ value }}" name="{{ name }}" min="{{ min }}" max="{{ max }}" step="{{ step }}" placeholder="{{ placeholder }}" id="{{id}}"
-       class="font-mono bg-white border border-slate-300 text-gray-900 text-sm rounded-lg focus:invalid:border-rose-500 focus:ring-sky-500 focus:border-sky-500 block w-full p-2"
-    {% if readonly %}readonly=""{% endif %}
-    {{ required_text }}>
+<input type="number" value="{{ value }}" name="{{ name }}" min="{{ min }}" max="{{ max }}" step="{{ step }}"
+    placeholder="{{ placeholder }}" id="{{id}}"
+    class="font-mono bg-white border border-slate-300 text-sm rounded-lg focus:invalid:border-rose-500 focus:ring-sky-500 focus:border-sky-500 block w-full p-2"
+    {% if readonly %}readonly="" {% endif %} {{ required_text }}>
 
 {% endmacro %}
 
-{% macro submit_button(button_text, type = "default", formaction = "", onclick=None, id=None) %}
+{% macro submit_button(button_text, type = "default", formaction = "", onclick=None, id=None, size="full") %}
 {# A submit button for your form
     Args:
         button_text: Text to display in button
         label_text: Text to display in the label
         formaction: Specify formaction if needed
+        size: small or full-size
 #}
 {% set main_color = "sky-500" %}
 {% set secondary_color = "sky-700" %}
@@ -101,9 +102,18 @@
 
 {% set formaction_string = 'formaction=' ~ formaction %}
 
+{% if size == "full" %}
+{% set btn_size = "p-4 w-full" %}
+{% set font_size = "text-lg" %}
+{% elif size == "small" %}
+{% set btn_size = "p-2" %}
+{% set font_size = "text-sm" %}
+{% endif %}
+
 <button
-    class="bg-{{ main_color }} hover:bg-{{ secondary_color }} p-4 rounded w-full h-fit text-lg text-white leading-tight focus:ring-{{ main_color }} focus:border-{{ main_color }} transition duration-150 ease-in-out"
-    type="submit" onclick="{{onclick}}" value="{{ button_text }}" name="submit" id={{id}} {{ formaction_string if formaction != "" }}>
+    class="bg-{{ main_color }} hover:bg-{{ secondary_color }} rounded {{ btn_size }} h-fit {{ font_size }} text-white leading-tight focus:ring-{{ main_color }} focus:border-{{ main_color }} transition duration-150 ease-in-out"
+    type="submit" onclick="{{onclick}}" value="{{ button_text }}" name="submit" id={{id}}
+    {{ formaction_string if formaction != "" }}>
     {{ button_text }}
 </button>
 {% endmacro %}

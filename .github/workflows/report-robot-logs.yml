@@ -40,7 +40,7 @@ jobs:
         with:
           script: |
             var fs = require('fs');
-            var issue_number = Number(fs.readFileSync('./NR'));
+            var issue_number = String(fs.readFileSync('./NR'));
             return issue_number
 
       - name: 'Send report to commit'

@@ -13,7 +13,7 @@ ${ADMIN URL}  ${URL}/admins
 
 *** Keywords ***
 Open And Configure Browser
-    Open Browser  browser=${BROWSER}
+    Open Browser  browser=${BROWSER}  options=add_argument("--no-sandbox")
     Maximize Browser Window
     Set Selenium Speed  ${DELAY}
 

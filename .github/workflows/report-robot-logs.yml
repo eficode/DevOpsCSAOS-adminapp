@@ -41,8 +41,8 @@ jobs:
           script: |
             var fs = require('fs');
             var issue_number = String(fs.readFileSync('./NR'));
-            return issue_number
-
+            return issue_number.slice(0, -2).toString();
+          # parses commit sha from artifact, removes \n from the end of the string
       - name: 'Send report to commit'
         uses: joonvena/robotframework-reporter-action@v2.1
         with:

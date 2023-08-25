@@ -38,16 +38,17 @@ jobs:
         id: fetch_sha
         uses: actions/github-script@v6
         with:
+          result-encoding: string
           script: |
             var fs = require('fs');
             var issue_number = String(fs.readFileSync('./NR'));
             return issue_number.slice(0, -2).toString();
           # parses commit sha from artifact, removes \n from the end of the string
+      - run: echo "${{steps.fetch_sha.outputs.result}}"
       - name: 'Send report to commit'
         uses: joonvena/robotframework-reporter-action@v2.1
         with:
           report_path: reports
           gh_access_token: ${{ secrets.GITHUB_TOKEN }}
           show_passed_tests: true
-          sha: ${{steps.fetch_sha.outputs.result}}
-      - run: echo "${{steps.fetch_sha.outputs.result}}"
+          sha: ${{ steps.fetch_sha.outputs.result }}
